@@ -1,0 +1,35 @@
+<div th:replace="fragments/header::header"></div>
+<a th:href="@{/receiver}"><button class="btn btn-primary">Ajouter un récipient</button></a>
+<div class="row d-flex justify-content-center">
+<form th:action="@{/aAutreCompte}" method="post" class="col col-6">
+<p>Compte à débiter </p>
+<select name="compteD" class="browser-default custom-select form-control">
+  <option value="Ccp" selected>CCP</option>
+  <option value="LivretA">Livret-A</option>  
+</select><br>
+<p>Compte à créditer </p>
+ <select class="form-control" name="compteC" id="receiverId" required="required">
+                        <option disabled="disabled" selected="selected"> -- select the recipient -- </option>
+                        <option data-th-each="receiver : ${receivers}" data-th-text="${receiver.nom}" data-th-value="${receiver.id}"></option>
+                    </select>
+<!--<select name="compteC" th:field="*{receivers}">
+    <option th:each="id : ${receivers}" th:value="${receiver.id}" th:text="${receiver.nom}">
+    </option>
+</select>-->
+<!--<select name="compteC" class="browser-default custom-select form-control">
+<th:block th:each="receiver : ${receivers}">
+  <option value="${receiver.id}" th:text="${receiver.nom}"></option>
+</th:block>
+</select><br>-->
+<p>Select an amount</p>
+<div class="input-group mb-3">
+<input type="text" class="form-control" name="amount" size="2" aria-label="Dollar amount (with dot and two decimal places)">
+  <div class="input-group-append">
+    <span class="input-group-text">&euro;</span>   
+  </div>
+  </div> 
+  <button class="btn btn-primary">submit</button>
+</form>
+</div>
+
+<div th:replace="fragments/footer::footer"></div>

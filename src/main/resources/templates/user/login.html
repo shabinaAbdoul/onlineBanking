@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html  th:fragment="header" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Font Awesome -->
+<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
+  rel="stylesheet"
+/>
+</head>
+<body>
+<div class="bg-info text-center text-dark" style="height:15%; padding-top:1.5%;">
+<h1>Bienvenu La Banque Bon heure</h1>
+</div>
+<div class="container bg-success p-2 text-white bg-opacity-25
+bg-gradient d-flex align-items-center justify-content-center" style="height:100vh;">
+	     <form th:action="@{/login}" method="post" style="width:70vh;">
+			    <div th:if="${param.error}" class="alert alert-danger">
+			    	Oups !
+			    </div>
+	        <h4 class="modal-title text-center text-primary">Login to Your Account</h4>
+	        <br>
+	        <div class="form-group">
+	            <input type="text" id="email" name="username" th:placeholder="UserName" class="form-control" required/>
+	        </div>
+	        <br>
+	        
+	        <div class="form-group">
+	            <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" required/>
+	        </div>
+	         <br>
+	        <div class="form-group small clearfix">
+	            <label class="checkbox-inline"><input type="checkbox"> Remember me</label>
+	            <a href="#" class="forgot-link">Forgot Password?</a>
+	        </div>
+	        <input type="submit" class="btn peach-gradient btn-block btn-lg" value="Je me connecte !">
+	         <a th:href="@{/register}"type="button" class="btn peach-gradient btn-block btn-lg">Je m'inscrire !</a>
+	      
+	    </form>
+</div>
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"
+></script>
+  </body>
+</html>

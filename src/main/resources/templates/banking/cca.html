@@ -1,0 +1,54 @@
+<div th:replace="fragments/header::header"></div>
+
+<div class="row" style="padding:5%;">
+<div class="col col-12">
+<div class="card text-center border border-primary shadow-0 ">
+
+  <div class="card-body">
+    <h5 class="card-title">CCA</h5>
+    <p class="card-text">
+     Current balance:<span th:text="${ccpAccount.balance}"/>&euro;
+    </p>
+  </div>
+
+</div>
+</div>
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-light " id="ccaTable">
+  <thead class="black white-text">
+    <tr>
+      <th scope="col">Date </th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+      <th scope="col">Type</th>
+      <th scope="col">Amount</th>  
+           
+    </tr>
+  </thead>
+  <tbody> 
+  
+  
+   <th:block th:each="ccpOp : ${ccpOperations}">
+      <tr>
+         <td th:text="${ccpOp.creationDateTime}">...</td>
+         <td th:text="${ccpOp.description}">...</td>
+         <td th:text="${ccpOp.status}">...</td>
+         <td th:text="${ccpOp.type}">...</td> 
+          <td th:if = "${ccpOp.type == 'crédit'}" th:text="${+ccpOp.amount}"></td>
+        <td th:if = "${ccpOp.type == 'débit'}" th:text="${-ccpOp.amount}"></td>
+        <!-- <td th:text="${ccpOp.amount}">...</td> -->
+                 
+      </tr>
+     
+   </th:block>
+
+ 
+  </tbody>
+</table>
+</div>
+
+
+
+<div th:replace="fragments/footer::footer"></div>
