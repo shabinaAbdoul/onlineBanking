@@ -1,148 +1,157 @@
 <!DOCTYPE html>
 
-<html  th:fragment="header" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html th:fragment="header" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <!-- Font Awesome -->
-<!-- Font Awesome -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-<!-- Google Fonts -->
-<link
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-  rel="stylesheet"
-/>
-<!-- MDB -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
-  rel="stylesheet"
-/>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<!-- Font Awesome -->
+	<!-- Font Awesome -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+	<!-- MDB -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" rel="stylesheet" />
 </head>
-<body >
-<div class="bg-info text-center text-dark" style="height:15%; padding-top:1.5%;">
-<h1>Bienvenu La Banque Bon heure</h1>
-</div>
- 
-<div class="container bg-success p-2 text-white bg-opacity-25
+
+<body>
+	<div class="bg-info bg-opacity-75 bg-gradient  text-center text-primary" style="height:15%; padding:2%;">
+		<img width="5%" style="border-radius: 50%; display:inline"src="https://media.istockphoto.com/vectors/letter-linked-business-logo-bh-logo-design-bh-logo-design-for-real-vector-id1339017004?b=1&k=20&m=1339017004&s=170667a&w=0&h=f1X72CJ3_E4rhkpgmjzkIs4l1HcXmv_enlAXNmZSC24="/>
+<span style="font-size:200%; font-weight:bold;">Bonne heure</span>
+<h5>La banque en ligne</h5>
+	</div>
+
+	<div class="bg-success p-2 text-white bg-opacity-25
 bg-gradient d-flex align-items-center justify-content-center" style="height:100vh;">
 
-<div th:if="${param.code}">
-<div th:text="${param.userId}"/>
-<div id="otp">
+		<div th:if="${param.errorEmail}"><div class="alert alert-danger">Mail address est déjà enregitrée vous pouvez<a th:href="@{/login}"> connecter</a></div></div>
+			<form th:action="@{/register}" method="post" style="width:70vh;" onSubmit="return verifUser();">
+				<!-- 2 column grid layout with text inputs for the first and last names -->
 
-	<div class="form-outline mb-4">
-    <input type="text" id="otpByUser"  class="form-control  bg-light" />
-    <label class="form-label" for="otpByUser">Enter your OTP here</label>
-  </div>
-   <input type="text" id="otpBySys" th:value=${param.code} class="form-control  bg-light" />
-  <button onclick="verifCode();" class="btn btn-primary btn-block mb-4">Verify</button>
+				<h4 class="modal-title text-center text-primary">Créer un compte</h4>
+				<br>
+				<div id="errorMessage" class="alert alert-danger">Tous les champs sont requis!!</div>
+				<div class="row mb-4">
+				<div class="form-outline mb-4">	
+					<div class="form-check">
+						  <input type="radio" class="form-check-input" value="Madame" id="genre" name="genre" checked>
+						  <label class="form-check-label" >Madame</label>
+						</div>
+						
+						<!-- Material checked -->
+						<div class="form-check">
+						  <input type="radio" class="form-check-input" value="Monsieur" id="genre" name="genre" >
+						  <label class="form-check-label" >Monsieur</label>
+						</div></div>
+					<div class="col">
+						<div class="form-outline">
+							<input type="text" name="firstName" id="firstName" class="form-control bg-light" />
+							<label class="form-label" for="firstName">Nom</label>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-outline">
+							<input type="text" name="lastName" id="lastName" class="form-control  bg-light" />
+							<label class="form-label" for="lastName">Prenom</label>
+						</div>
+					</div>
+				</div>
 
-</div>
-<div id="tryAgain" class="alert alert-danger">
-You have entered a wrong OTP <a th:href="@{/register}">try again</a> to create your account
-</div>
 
+				<!-- Email input -->
+				<div class="form-outline mb-4">					
+					<input type="email" id="email" name="email" class="form-control  bg-light" />
+					<label class="form-label" for="email">Email address</label>
+				</div>
+					
+				<div class="form-outline mb-4">
+					<input type="text" id="mobile" name="mobile" class="form-control  bg-light" />
+					<label class="form-label" for="mobile">Numéro de portable</label>
+				</div>
 
-<div id="fixPassword">
-			<form th:action="@{/final/{id}(id=${param.userId})}" method="post" style="width:70vh;">			
-			 <h4 class="modal-title text-center text-primary">Create an account</h4>
-			  <div class="form-outline mb-4">
-    <input type="text" id="form3Example3" name="userName" class="form-control  bg-light" />
-    <label class="form-label" for="form3Example3">User Name</label>
-  </div>
-  
-  <div class="form-outline mb-4">
-    <input type="text" id="form3Example3" name="password" class="form-control  bg-light" />
-    <label class="form-label" for="form3Example3">Password</label>
-  </div>
-  <input type="hidden" name="enabled" value="1"/>
- 
-  
-   <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+				<div class="form-outline mb-4">
+					<input type="text" id="address" name="address" class="form-control  bg-light" />
+					<label class="form-label" for="address">Address</label>
+				</div>
+				<div class="form-outline mb-4">
+					<input type="text" id="ville" name="ville" class="form-control  bg-light" />
+					<label class="form-label" for="ville">Ville</label>
+				</div>
+				<div class="form-outline mb-4">
+					<input type="text" id="codePostal" name="codePostal" class="form-control  bg-light" />
+					<label class="form-label" for="codePostal">Code Postal</label>
+				</div><button type="submit" class="btn btn-primary btn-block mb-4">Envoyer OTP</button>
+
 			</form>
-			
-			</div>
-		
- </div>
-	<div th:if="${param.code == null}">  
-<form th:action="@{/register}" method="post" style="width:70vh;">
-  <!-- 2 column grid layout with text inputs for the first and last names -->
-  <h4 class="modal-title text-center text-primary">Create an account</h4>
-	        <br>
-  <div class="row mb-4">
-    <div class="col">
-      <div class="form-outline">
-        <input type="text" name="firstName" id="form3Example1" class="form-control bg-light" />
-        <label class="form-label" for="form3Example1">First name</label>
-      </div>
-    </div>
-    <div class="col">
-      <div class="form-outline">
-        <input type="text" name="lastName" id="form3Example2" class="form-control  bg-light" />
-        <label class="form-label" for="form3Example2">Last name</label>
-      </div>
-    </div>
-  </div>
-  
+		</div>
 
-  <!-- Email input -->
-  <div class="form-outline mb-4">
-    <input type="email" id="form3Example3" name="email" class="form-control  bg-light" />
-    <label class="form-label" for="form3Example3">Email address</label>
-  </div>
-  
-  <div class="form-outline mb-4">
-    <input type="text" id="form3Example3" name="mobile" class="form-control  bg-light" />
-    <label class="form-label" for="form3Example3">Mobile number</label>
-  </div>
-  
-  <div class="form-outline mb-4">
-    <input type="text" id="form3Example3" name="address" class="form-control  bg-light" />
-    <label class="form-label" for="form3Example3">Address</label>
-  </div>
-   <div class="form-outline mb-4">
-    <input type="text" id="form3Example3" name="ville" class="form-control  bg-light" />
-    <label class="form-label" for="form3Example3">Ville</label>
-  </div>
-   <div class="form-outline mb-4">
-    <input type="text" id="form3Example3" name="codePostal" class="form-control  bg-light" />
-    <label class="form-label" for="form3Example3">Code Postal</label>
-  </div>
-  
-   
-  
-  <button type="submit" class="btn btn-primary btn-block mb-4">Send OTP</button>
+	<!-- MDB -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
+	
+	<script>		
+		document.querySelector("#errorMessage").style.display = "none";
+		function verifUser() {
+			let mailformat = /^[a-zA-Z0-9_.-]+[@][a-zA-Z0-9-]+[.]+[a-zA-Z0-9]+$/;
+			let mobileformat = /^(0|(\\+33)|(0033))[1-9][0-9]{8}$/;
+			let codePostalFormat = /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/;
+			let alphabet = /^[a-zA-Z '.-]*$/;
+			let mobile = document.querySelector("#mobile");
+			let email = document.querySelector("#email");
+			let firstName = document.querySelector("#firstName");
+			let lastName = document.querySelector("#lastName");
+			let address = document.querySelector("#address");
+			let ville = document.querySelector("#ville");
+			let codePostal = document.querySelector("#codePostal");
+			if ((mobile.value == "" || email.value == "" || firstName.value == "" || lastName.value == ""
+				|| address.value == "" || ville.value == "" || codePostal.value == "")) {
+				document.querySelector("#errorMessage").style.display = "block";
+				document.querySelector("#errorMessage").innerHTML="Tous les champs sont requis!!";
+				return false;
+			}
+			else {
+				if ((email.value).match(mailformat)) {
 
-</form>
-	</div> 
-</div>
-<!-- MDB -->
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"
-></script>
-<script>
-document.querySelector("#fixPassword").style.display="none";
-document.querySelector("#tryAgain").style.display="none";
-function verifCode(){
-	let otpUser=document.querySelector("#otpByUser").value;
-	let otpSys=document.querySelector("#otpBySys").value;
-	if(otpUser == otpSys){
-		document.querySelector("#otp").style.display="none";
-		document.querySelector("#fixPassword").style.display="block";
-		
-	}
-	else{
-		document.querySelector("#otp").style.display="none";
-		document.querySelector("#tryAgain").style.display="block";
-		
-	}
-}
-</script>
-  </body>
+					if ((mobile.value).match(mobileformat)) {
+						if ((codePostal.value).match(codePostalFormat)) {
+							if ((ville.value).match(alphabet)) {
+								if ((firstName.value).match(alphabet) && (lastName.value).match(alphabet)) {
+								return true;
+								}
+								else {
+								document.querySelector("#errorMessage").style.display = "block";
+								document.querySelector("#errorMessage").innerHTML="Nom ou Prenom n'est pas valide!!";
+								return false;
+								}
+							}
+							else {
+							document.querySelector("#errorMessage").style.display = "block";
+							document.querySelector("#errorMessage").innerHTML="Ville n'est pas valide!!";
+							return false;
+							}
+						}
+						else {
+						document.querySelector("#errorMessage").style.display = "block";
+						document.querySelector("#errorMessage").innerHTML="CodePostal n'est pas valide!!";
+						return false;
+					}
+					}
+					else {
+						document.querySelector("#errorMessage").style.display = "block";
+						document.querySelector("#errorMessage").innerHTML="Numéro de portable n'est pas valide!!";
+						return false;
+					}
+				}
+				else {
+					document.querySelector("#errorMessage").style.display = "block";
+					document.querySelector("#errorMessage").innerHTML="Email n'est pas valide!!";						
+					return false;
+				}
+			}
+		}
+
+	</script>
+	
+</body>
+
 </html>

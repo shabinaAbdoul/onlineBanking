@@ -1,0 +1,36 @@
+<div th:replace="fragments/header::header"></div>
+<div th:replace="fragments/nav::nav"></div>
+<div class="d-flex justify-content-center bg-success bg-opacity-25
+bg-gradient" style="padding-top:2%; ">
+<form th:action="@{/updateReceiver/{id}(id=${receiver.id})}" th:object="${receiver}" method="post" style="width:70vh;">
+  <!-- 2 column grid layout with text inputs for the first and last names -->
+  <h4 class="modal-title text-center text-primary">Ajouter un nouveau récepteur</h4>
+	        <br>
+  
+    <div class="form-outline mb-4">
+    <input type="text" id="form3Example3" name="nom" class="form-control  bg-light" th:field="*{nom}"/>
+    <label class="form-label" for="form3Example3">Nom</label>
+  </div>
+      
+  
+
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="email" id="form3Example3" name="email" th:field="*{email}" class="form-control  bg-light" />
+    <label class="form-label" for="form3Example3">Email address</label>
+  </div>
+  
+  <div class="form-outline mb-4">
+    <input type="text" id="form3Example3" name="mobile" th:field="*{mobile}" class="form-control  bg-light" />
+    <label class="form-label" for="form3Example3">Mobile number</label>
+  </div>
+ <div class="form-outline mb-4">
+    <input type="text" id="form3Example3" name="numIban" th:field="*{numIban}" class="form-control  bg-light" />
+    <label class="form-label" for="form3Example3">Numéro de compte</label>
+  </div>
+  <button type="submit" class="btn btn-primary btn-block mb-4">Update</button>
+</form>
+</div>
+</div>
+
+<div th:replace="fragments/footer::footer"></div>

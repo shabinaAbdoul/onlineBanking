@@ -1,14 +1,18 @@
 <div th:replace="fragments/header::header"></div>
+<div th:replace="fragments/nav::nav"></div>
 
-
+<div>
 <div class="row" style="padding:15%;">
 <div class="col col-6">
 <div class="card text-center border border-primary shadow-0 ">
 <a th:href="@{/cca}">
   <div class="card-body">
-    <h5 class="card-title">CCA</h5>
+    <h5 class="card-title">CCP</h5>
     <p class="card-text">
-     Account balance:<span th:text="${ccpAccount.balance}"/>&euro;
+     N° de compte:<span th:text="${ccpAccount.id}"/>
+    </p>
+    <p class="card-text">
+      Solde actuel:<span th:text="${ccpAccount.balance}"/>&euro;
     </p>
   </div>
 </a>
@@ -21,14 +25,16 @@
   <div class="card-body">
     <h5 class="card-title">Livret A</h5>
     <p class="card-text">
-      Account balance:<span th:text="${livretA.balance}"/>&euro;
+     N° de compte:<span th:text="${livretA.id}"/>
     </p>
-
-
-  </div>
+    <p class="card-text">
+       Solde actuel:<span th:text="${livretA.balance}"/>&euro;
+    </p>
+     </div>
 </a>
 </div>
 </div>
 </div>
-
+</div>
+</div>
 <div th:replace="fragments/footer::footer"></div>

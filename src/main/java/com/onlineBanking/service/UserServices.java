@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.onlineBanking.model.CcpAccount;
 import com.onlineBanking.model.User;
 import com.onlineBanking.model.UserDetails;
 import com.onlineBanking.repository.UserDetailsRepository;
@@ -43,6 +44,12 @@ public void createUserDetails(UserDetails userDetails) {
 		user.setPassword(crypt.encode(user.getPassword()));		
 		userRepo.save(user);
 	}
+public void changePassword(User user) {
+		
+		BCryptPasswordEncoder crypt = new BCryptPasswordEncoder();
+		user.setPassword(crypt.encode(user.getPassword()));		
+		userRepo.save(user);
+	}
 
 
 
@@ -52,5 +59,8 @@ public void createUserDetails(UserDetails userDetails) {
 	}
 
 
-	
+
+	public void deleteById(Long id) {
+		userDetRepo.deleteById(id);
+	}
 }

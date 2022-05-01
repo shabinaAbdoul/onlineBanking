@@ -1,0 +1,40 @@
+<div th:replace="admin/fragments/headerAdmin::headerAdmin"></div>
+<br><br>
+<div style="padding-left:20%;">
+<h3 class="text-center text-light">Ccp compte details de user <b th:text="${user.firstName}"></b></h3>
+<h5 class="text-center text-light">Total montant <b th:text="${user.ccpAccount.balance}"></b></h5>
+
+<div class="table-responsive">
+<table class="table table-bordered text-light " id="ccaTable">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Date </th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+      <th scope="col">Type</th>
+      <th scope="col">Amount</th>  
+           
+    </tr>
+  </thead>
+  <tbody> 
+  
+  
+   <th:block th:each="ccpOp : ${ccpOperations}">
+      <tr>
+         <td th:text="${ccpOp.creationDateTime}">...</td>
+         <td th:text="${ccpOp.description}">...</td>
+         <td th:text="${ccpOp.status}">...</td>
+         <td th:text="${ccpOp.type}">...</td> 
+          <td th:if = "${ccpOp.type == 'crédit'}" th:text="${+ccpOp.amount}"></td>
+        <td th:if = "${ccpOp.type == 'débit'}" th:text="${-ccpOp.amount}"></td>
+                 
+      </tr>
+     
+   </th:block>
+
+ 
+  </tbody>
+</table>
+</div>
+</div>
+ <div th:replace="admin/fragments/footer::footer"></div>

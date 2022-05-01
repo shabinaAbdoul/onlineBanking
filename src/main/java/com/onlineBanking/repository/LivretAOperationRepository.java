@@ -13,6 +13,10 @@ import com.onlineBanking.model.LivretAOperation;
 @Repository
 public interface LivretAOperationRepository extends JpaRepository<LivretAOperation, Long> {
 
-	List<LivretAOperation> findBylivretA(LivretA livretA);	
+	List<LivretAOperation> findBylivretA(LivretA livretA);
+
+	List<LivretAOperation> findByStatus(String status);
+
+	List<LivretAOperation> findByLivretAOrderByCreationDateTimeDesc(LivretA livretA);	
 
 }

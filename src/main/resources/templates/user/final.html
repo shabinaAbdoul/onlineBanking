@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html th:fragment="header" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<!-- Font Awesome -->
+	<!-- Font Awesome -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+	<!-- MDB -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="bg-info bg-opacity-75 bg-gradient  text-center text-primary" style="height:15%; padding:2%;">
+		<img width="5%" style="border-radius: 50%; display:inline"src="https://media.istockphoto.com/vectors/letter-linked-business-logo-bh-logo-design-bh-logo-design-for-real-vector-id1339017004?b=1&k=20&m=1339017004&s=170667a&w=0&h=f1X72CJ3_E4rhkpgmjzkIs4l1HcXmv_enlAXNmZSC24="/>
+<span style="font-size:200%; font-weight:bold;">Bonne heure</span>
+<h5>La banque en ligne</h5>
+	</div>
+
+	<div class="bg-success p-2 text-white bg-opacity-25
+bg-gradient d-flex align-items-center justify-content-center" style="height:100vh;">
+	<form th:action="@{/final/{id}(id=${userId})}" method="post" style="width:70vh;" onsubmit="return verif();">
+					<div th:if="${error != null}"><div class="alert alert-danger">Nom d'utilisateur déjà exists re essayer un autre</div></div>
+	<div id="errorVerif" class="alert alert-danger"></div>
+					<h4 class="modal-title text-center text-primary">Créer un compte</h4>
+					<div class="form-outline mb-4">
+						<input type="text" id="username" name="userName" class="form-control  bg-light" />
+						<label class="form-label" for="form3Example3">Nom d'utilisateur</label>
+					</div>
+					<div id="motdepassIncorrect"class="text-danger">Mot de pass doit avoir minimum 8 character(minimum 1 character miniscule, 1 character majiscule, 1 digit, 1 character spécial)</div>
+					<div class="form-outline mb-4">
+						<input type="password" id="pass" name="password" class="form-control  bg-light" />
+						<label class="form-label" for="form3Example3">Mot de passe</label>
+					</div>
+					
+					<div class="form-outline mb-4">
+						<input type="password" id="confPass" class="form-control  bg-light" />
+						<label class="form-label" for="form3Example3">Confirmer mot de passe</label>
+					</div>
+					<input type="hidden" name="enabled" value="1" />
+
+
+					<button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+				</form>
+
+	</div>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
+<script>
+	document.querySelector("#errorVerif").style.display = "none";
+	let username = document.querySelector("#username");
+			let pass = document.querySelector("#pass");
+			let confPass = document.querySelector("#confPass");
+			document.querySelector("#motdepassIncorrect").style.display = "none";
+		let	regexPassword= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}$/;
+		pass.addEventListener('keyup', function() {
+  if(!(this.value).match(regexPassword)){
+	document.querySelector("#motdepassIncorrect").style.display = "block";
+	
+	}
+	else{
+		document.querySelector("#motdepassIncorrect").style.display = "none";
+	}
+});
+	function verif() {
+		if ((username.value == "" || pass.value == "" || confPass.value == "")) {
+				document.querySelector("#errorVerif").style.display = "block";
+				document.querySelector("#errorVerif").innerHTML="Tous les champs sont obligatoires!!";
+				return false;
+			}
+			else if(document.querySelector("#pass").value != document.querySelector("#confPass").value){
+				document.querySelector("#errorVerif").style.display = "block";
+				document.querySelector("#errorVerif").innerHTML="Mot de pass est incorrect!!";
+				return false;				
+			}
+			else{
+				return true;
+			}
+		
+	}
+	</script>
+</body>
+</html>

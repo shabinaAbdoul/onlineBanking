@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.onlineBanking.model.CcpAccount;
 import com.onlineBanking.model.LivretA;
+import com.onlineBanking.model.Receiver;
 import com.onlineBanking.model.User;
 import com.onlineBanking.model.UserDetails;
 import com.onlineBanking.repository.CcpAccountRepository;
@@ -40,6 +41,14 @@ public Optional<CcpAccount> findById(Long compteC) {
 
 	
 }
+
+
+public Optional<CcpAccount> findByNumIban(String numIban) {
+	return ccpAccountRepository.findByNumIban(numIban);
+}
+
+
+
 
 
 

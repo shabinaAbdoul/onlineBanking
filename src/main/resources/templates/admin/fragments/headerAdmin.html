@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html th:fragment="headerAdmin" xmlns:th="http://www.thymeleaf.org" 
+						   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Font Awesome -->
+<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
+  rel="stylesheet"
+/>
+<link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"/>
+
+
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+*{
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body{
+    
+     background:rgb(0, 19, 38);
+}
+
+.wrapper .sidebar{
+   background:black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    padding: 20px 0;
+    transition: all 0.5s ease;
+}
+
+.wrapper .sidebar .profile{
+   
+    text-align: center;
+}
+
+.wrapper .sidebar .profile img{
+    display: block;
+    width: 30%;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.wrapper .sidebar .profile h3{
+    color: #ffffff;
+    margin-bottom:40px;
+   
+}
+.wrapper .sidebar ul li a{
+    display: block;
+     background:rgb(0, 19, 38);
+    color: rgb(241, 237, 237);
+    font-size: 16px;
+    position: relative;
+}
+.gradient-custom3 {
+  /* fallback for old browsers */
+  background: #5ee7df;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(94, 231, 223, 0.5), rgba(180, 144, 202, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(94, 231, 223, 0.5), rgba(180, 144, 202, 0.5))
+}
+.gradient-custom2 {
+ background: #cd9cf2;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(205, 156, 242, 0.5), rgba(246, 243, 255, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(205, 156, 242, 0.5), rgba(246, 243, 255, 0.5))
+  }
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #f6d365;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(246, 211, 101, 0.5), rgba(253, 160, 133, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(246, 211, 101, 0.5), rgba(253, 160, 133, 0.5))
+}
+
+ </style>
+
+
+<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
+</head>
+<body>
+    <div class="wrapper">
+        <!--Top menu -->
+         <div class="sidebar">
+       
+           <div class="profile">
+                <img style="border-radius: 50%; display:inline"src="https://media.istockphoto.com/vectors/letter-linked-business-logo-bh-logo-design-bh-logo-design-for-real-vector-id1339017004?b=1&k=20&m=1339017004&s=170667a&w=0&h=f1X72CJ3_E4rhkpgmjzkIs4l1HcXmv_enlAXNmZSC24="/>
+<h3>Shabina</h3>
+                
+            </div>       
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item text-center">
+          <a class="nav-link text-light active " th:href="@{/admin}">Dashboard</a>
+        </li>
+       
+      </ul>
+        </div>
+   </div>
+   

@@ -1,26 +1,33 @@
 <div th:replace="fragments/header::header"></div>
+<div th:replace="fragments/nav::nav"></div>
 
-<div class="row d-flex justify-content-center">
-<form th:action="@{/aMonCompte}" method="post" class="col col-md-6 col-sm-12">
+<div class="row d-flex justify-content-center" style="padding-top:5%; height:100%;">
+<form th:action="@{/aMonCompte}" method="post" class="col col-md-6 col-sm-12" onsubmit="return verifEntreMonCompte();">
+ <div th:if="${param.error}" class="alert alert-danger">
+   Le solde de votre compte n’est pas suffisant pour transférer ce montant!
+ </div>
+ <div id="errorEntreMonCompte" class="alert alert-danger"></div>
+
 <p>Compte à débiter </p>
-<select name="compteD" class="browser-default custom-select form-control">
+<select name="compteD" id="compteD" class="browser-default custom-select form-control">
   <option value="Ccp" selected>CCP</option>
   <option value="LivretA">Livret-A</option>  
 </select><br>
 <p>Compte à créditer </p>
-<select name="compteC" class="browser-default custom-select form-control">
+<input type="text" value="LivretA" name="compteC" id="compteC" class="form-control" readonly><br>
+<!--<select name="compteC" class="browser-default custom-select form-control">
   <option value="Ccp" selected>CCP</option>
   <option value="LivretA">Livret-A</option>  
-</select><br>
-<p>Select an amount</p>
+</select><br>-->
+<p>Sélectionnez le montant</p>
 <div class="input-group mb-3">
-<input type="text" class="form-control" name="amount" size="2" aria-label="Dollar amount (with dot and two decimal places)">
+<input type="text" class="form-control" id="amountEntreMonCompte" name="amount" size="2" aria-label="Dollar amount (with dot and two decimal places)">
   <div class="input-group-append">
     <span class="input-group-text">&euro;</span>   
   </div>
   </div> 
-  <button class="btn btn-primary">submit</button>
+  <button class="btn btn-primary btn-block mb-4">submit</button>
 </form>
 </div>
-
+</div>
 <div th:replace="fragments/footer::footer"></div>

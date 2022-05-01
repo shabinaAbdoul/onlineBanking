@@ -1,0 +1,122 @@
+
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container">
+   
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-primary" th:href="@{/home}">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+        
+  <button
+    class="btn btn-primary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    data-mdb-toggle="dropdown"
+    aria-expanded="false"
+  >
+   Operations
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <li><a class="dropdown-item" th:href="@{/cca}">CCP</a></li>
+     <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" th:href="@{/livretA}">Livret A</a></li>
+   
+  </ul>
+
+        </li>
+        <li class="nav-item dropdown">
+        
+  <button
+    class="btn btn-primary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    data-mdb-toggle="dropdown"
+    aria-expanded="false"
+  >
+   Virement
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <li><a class="dropdown-item" th:href="@{/aMonCompte}">Enter mes comptes</a></li>
+     <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" th:href="@{/aAutreCompte}">Comptes extraines</a></li>
+   
+  </ul>
+
+        </li>
+         <li class="nav-item dropdown">
+        
+  <button
+    class="btn btn-primary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    data-mdb-toggle="dropdown"
+    aria-expanded="false"
+  >
+   Actions
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <li><a class="dropdown-item" th:href="@{/retrait}">Retrait</a></li>
+     <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" th:href="@{/versement}">Versement</a></li>
+   
+  </ul>
+
+        </li>
+      </ul>
+      <!-- Left links -->
+
+      <div class="d-flex align-items-center">
+     <h5> <span>Bonjour&nbsp;</span><span sec:authentication="name">userName</span></h5>
+     
+      <li class="nav-item dropdown">
+        
+  <button
+    class="btn btn-primary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    data-mdb-toggle="dropdown"
+    aria-expanded="false"
+  >
+   Mon profile
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <li><a class="dropdown-item" th:href="@{/updateProfile}">Modifier profile</a></li>
+     <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" th:href="@{/pdf}">E-relevés</a></li>
+     <li><hr class="dropdown-divider"></li>
+     <li><a class="dropdown-item" th:href="@{/rib}">RIB</a></li>
+     
+   
+  </ul>
+
+        </li>
+     
+       <!-- <span sec:authentication="principal.authorities">userName</span>-->
+       <a th:href="@{/logout}"> <button type="button" class="btn btn-primary me-3">
+          Log out
+        </button> </a>       
+      </div>
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>

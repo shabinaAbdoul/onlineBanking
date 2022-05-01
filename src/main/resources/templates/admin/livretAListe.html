@@ -1,0 +1,43 @@
+<div th:replace="admin/fragments/headerAdmin::headerAdmin"></div>
+<br>
+<br>
+<div style="padding-left:20%;">
+<h3 class="text-center text-light">Livret-A compte details de user <b th:text="${user.firstName}"></b></h3>
+<h5 class="text-center text-light">Total montant <b th:text="${user.LivretA.balance}"></b></h5>
+
+
+<div class="table-responsive">
+<table class="table table-bordered text-light " id="ccaTable">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Date </th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+      <th scope="col">Type</th>
+      <th scope="col">Amount</th>  
+           
+    </tr>
+  </thead>
+  <tbody> 
+  
+  
+   <th:block th:each="livretOp : ${livretAOperations}">
+      <tr>
+         <td th:text="${livretOp.creationDateTime}">...</td>
+         <td th:text="${livretOp.description}">...</td>
+         <td th:text="${livretOp.status}">...</td>
+         <td th:text="${livretOp.type}">...</td> 
+          <td th:if ="${livretOp.type == 'crédit'}" th:text="${+livretOp.amount}"></td>
+        <td th:if ="${livretOp.type == 'débit'}" th:text="${-livretOp.amount}"></td>
+        <!-- <td th:text="${ccpOp.amount}">...</td> -->                 
+      </tr>
+     
+   </th:block>
+
+ 
+  </tbody>
+</table>
+</div>
+
+</div>
+  <div th:replace="admin/fragments/footer::footer"></div>

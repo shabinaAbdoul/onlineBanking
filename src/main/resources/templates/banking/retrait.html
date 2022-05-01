@@ -1,21 +1,27 @@
 <div th:replace="fragments/header::header"></div>
-<div class="row d-flex justify-content-center">
+<div th:replace="fragments/nav::nav"></div>
+<div class="row d-flex justify-content-center" style="padding-top:5%; height:100%;">
 
 <form th:action="@{/retrait}" method="post" class="col col-6">
-<p>Select an account you want to withdraw your money </p>
+<div th:if="${param.error}" class="alert alert-danger">
+   Le solde de votre compte n’est pas suffisant pour retrait ce montant!
+ </div>
+<p>
+Sélectionnez un compte sur lequel vous souhaitez effectuer un retrait </p>
 <select name="account" class="browser-default custom-select form-control">
   <option value="Ccp" selected>CCP</option>
   <option value="LivretA">Livret-A</option>  
 </select><br><br>
-<p>Select an amount</p>
+<p>Sélectionnez le montant</p>
 <div class="input-group mb-3">
-<input type="text" class="form-control" name="amount" size="2" aria-label="Dollar amount (with dot and two decimal places)">
+<input type="text" class="form-control" required name="amount" size="2" aria-label="Dollar amount (with dot and two decimal places)">
 
   <div class="input-group-append">
     <span class="input-group-text">&euro;</span>   
   </div>
   </div> 
-  <button class="btn btn-primary">submit</button>
+  <button class="btn btn-primary">Submit</button>
 </form>
+</div>
 </div>
 <div th:replace="fragments/footer::footer"></div>

@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.onlineBanking.mailConfig.MailVerif;
 import com.onlineBanking.model.CcpAccount;
 import com.onlineBanking.model.CcpOperation;
 import com.onlineBanking.model.LivretA;
@@ -38,8 +39,7 @@ public void entreMonCompte(String compteD, String compteC, double amount, Princi
 	 User user = userService.findByUserName(principal.getName());
 	 CcpAccount ccpAccount = user.getUserDetails().getCcpAccount();
 	 LivretA livretA  = user.getUserDetails().getLivretA();
-	    if (compteD.equalsIgnoreCase("Ccp")) {
-         
+	    if (compteD.equalsIgnoreCase("Ccp")) {         
          ccpAccount.setBalance(ccpAccount.getBalance()-amount);
          ccpAccountService.save(ccpAccount);
          CcpOperation ccpOperation= new CcpOperation("Virement", "débit", "Terminé", amount, ccpAccount.getBalance(), ccpAccount);
@@ -70,13 +70,14 @@ public void entreMonCompte(String compteD, String compteC, double amount, Princi
 public void aAutreCompte(String compteD, Long compteC, double amount, Principal principal) {
 	 Date date=new Date();	
 	User user = userService.findByUserName(principal.getName());
+	
 	user.getUserDetails().getCcpAccount().getId();
 	Receiver receiver=findById(compteC).get();
 	 if (compteD.equalsIgnoreCase("Ccp")) {
 		 CcpAccount ccpAccount = user.getUserDetails().getCcpAccount();
          ccpAccount.setBalance(ccpAccount.getBalance()-amount);
          ccpAccountService.save(ccpAccount);
-         CcpOperation ccpOperation= new CcpOperation("Virement à "+receiver.getNom(), "débit", "Encours...", amount, ccpAccount.getBalance(), ccpAccount);
+         CcpOperation ccpOperation= new CcpOperation("Virement à "+receiver.getNom(), "débit", "Terminé", amount, ccpAccount.getBalance(), ccpAccount);
          ccpOperation.setCreationDateTime(date);
          ccpOperationService.save(ccpOperation); 
 	 }
@@ -84,24 +85,27 @@ public void aAutreCompte(String compteD, Long compteC, double amount, Principal 
 		 LivretA livretA = user.getUserDetails().getLivretA();
 		 livretA.setBalance(livretA.getBalance()-amount);
          livretAService.save(livretA);
-         LivretAOperation livretAOperation= new LivretAOperation("Virement à "+receiver.getNom(), "débit", "Encours...", amount, livretA.getBalance(), livretA);
+         LivretAOperation livretAOperation= new LivretAOperation("Virement à "+receiver.getNom(), "débit", "Terminé", amount, livretA.getBalance(), livretA);
          livretAOperation.setCreationDateTime(date);
          livretAOperationService.save(livretAOperation);
          }
-         if (!ccpAccountService.findById(receiver.getAccountNumber()).isEmpty()) {  
-         CcpAccount ccpAccountCrediter=ccpAccountService.findById(receiver.getAccountNumber()).get();             
-         ccpAccountCrediter.setBalance(ccpAccountCrediter.getBalance()+amount);
+         if (!ccpAccountService.findByNumIban(receiver.getNumIban()).isEmpty()) {  
+         CcpAccount ccpAccountCrediter=ccpAccountService.findByNumIban(receiver.getNumIban()).get();             
+         //ccpAccountCrediter.setBalance(ccpAccountCrediter.getBalance()+amount);
          CcpOperation ccpOperationCrediter= new CcpOperation("Virement de "+user.getUserDetails().getFirstName()+" "+user.getUserDetails().getLastName(), "crédit", "Encours...", amount, ccpAccountCrediter.getBalance(), ccpAccountCrediter);
          ccpOperationCrediter.setCreationDateTime(date);
          ccpOperationService.save(ccpOperationCrediter);   
          }
-         else if (!livretAService.findById(receiver.getAccountNumber()).isEmpty()) {
-        	 LivretA livretACrediter=livretAService.findById(receiver.getAccountNumber()).get();
-        	 livretACrediter.setBalance(livretACrediter.getBalance()+amount); 
+         else if (!livretAService.findByNumIban(receiver.getNumIban()).isEmpty()) {
+        	 LivretA livretACrediter=livretAService.findByNumIban(receiver.getNumIban()).get();
+        	// livretACrediter.setBalance(livretACrediter.getBalance()+amount); 
         	 LivretAOperation livretAOperationCrediter= new LivretAOperation("Virement de "+user.getUserDetails().getFirstName()+" "+user.getUserDetails().getLastName(), "crédit", "Encours...", amount, livretACrediter.getBalance(), livretACrediter);
         	 livretAOperationCrediter.setCreationDateTime(date);
              livretAOperationService.save(livretAOperationCrediter);  
          }
+         UserDetails userDetails=user.getUserDetails();
+         MailVerif.sendMail(userDetails.getEmail(), "Bonjour, "+userDetails.getGenre()+" "+ userDetails.getFirstName()+" virement de "+amount+"€ est efféctué par votre compte "+compteD);
+ 		
 	
 }
 
@@ -116,6 +120,10 @@ public List<Receiver> findByUserDetails(UserDetails userDetails) {
 }
 public Optional<Receiver> findById(Long id) {
 	return receiverRepository.findById(id);
+}
+public void deleteById(Long id) {
+	
+	receiverRepository.deleteById(id);
 }
 
 

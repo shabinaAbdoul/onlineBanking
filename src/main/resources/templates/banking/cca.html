@@ -1,13 +1,14 @@
 <div th:replace="fragments/header::header"></div>
-
-<div class="row" style="padding:5%;">
+<div th:replace="fragments/nav::nav"></div>
+<div>
+<div class="row" style="padding:2%;">
 <div class="col col-12">
 <div class="card text-center border border-primary shadow-0 ">
 
   <div class="card-body">
-    <h5 class="card-title">CCA</h5>
+    <h5 class="card-title">CCP</h5>
     <p class="card-text">
-     Current balance:<span th:text="${ccpAccount.balance}"/>&euro;
+     Solde actuel:<span th:text="${ccpAccount.balance}"/>&euro;
     </p>
   </div>
 
@@ -15,15 +16,16 @@
 </div>
 </div>
 
-<div class="table-responsive">
-<table class="table table-striped table-bordered table-light " id="ccaTable">
+<div class="table-responsive ">
+<table class="table table-striped table-bordered table-info bg-opacity-75
+bg-gradient " id="ccaTable">
   <thead class="black white-text">
     <tr>
       <th scope="col">Date </th>
-      <th scope="col">Description</th>
+      <th scope="col">Déscription</th>
       <th scope="col">Status</th>
       <th scope="col">Type</th>
-      <th scope="col">Amount</th>  
+      <th scope="col">Montant</th>  
            
     </tr>
   </thead>
@@ -31,8 +33,9 @@
   
   
    <th:block th:each="ccpOp : ${ccpOperations}">
-      <tr>
-         <td th:text="${ccpOp.creationDateTime}">...</td>
+    <tr>
+         <!--<td th:text="${ccpOp.creationDateTime}">...</td>-->
+         <td th:text="${#calendars.format(ccpOp.creationDateTime,'dd.MM.yyyy,  HH:mm:ss')}">...</td>
          <td th:text="${ccpOp.description}">...</td>
          <td th:text="${ccpOp.status}">...</td>
          <td th:text="${ccpOp.type}">...</td> 
@@ -48,7 +51,7 @@
   </tbody>
 </table>
 </div>
+</div>
 
-
-
+</div>
 <div th:replace="fragments/footer::footer"></div>

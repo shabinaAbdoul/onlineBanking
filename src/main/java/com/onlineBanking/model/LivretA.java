@@ -23,6 +23,7 @@ public class LivretA {
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;	
+	private String numIban;
 	private Double balance;
 	 
 	  @OneToMany(mappedBy = "livretA", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -38,6 +39,14 @@ public class LivretA {
 	}
 
 	
+
+	public String getNumIban() {
+		return numIban;
+	}
+
+	public void setNumIban(String numIban) {
+		this.numIban = numIban;
+	}
 
 	public Double getBalance() {
 		return balance;

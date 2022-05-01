@@ -1,0 +1,44 @@
+<div th:replace="admin/fragments/headerAdmin::headerAdmin"></div>
+<br>
+<br>
+<div style="padding-left:20%;">
+<h3 class="text-center text-light">Virement en attends au compte Livret A</h3>
+
+<div class="table-responsive">
+<table class="table table-bordered text-white" id="ccaTable">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Date </th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+      <th scope="col">Type</th>
+      <th scope="col">Amount</th>  
+      <th scope="col" >Accept</th>
+      <th scope="col">Refuse</th>
+           
+    </tr>
+  </thead>
+  <tbody> 
+  
+  
+   <th:block th:each="livretAOp : ${livretAOperations}">
+      <tr>
+         <td th:text="${livretAOp.creationDateTime}">...</td>
+         <td th:text="${livretAOp.description}">...</td>
+         <td th:text="${livretAOp.status}">...</td>
+         <td th:text="${livretAOp.type}">...</td> 
+          <td th:if = "${livretAOp.type == 'crédit'}" th:text="${+livretAOp.amount}"></td>
+        <td th:if = "${livretAOp.type == 'débit'}" th:text="${-livretAOp.amount}"></td>
+        <td><a th:href="@{/acceptOpLivretA/{id}(id=${livretAOp.id})}">Accept</a></td>
+         <td><a th:href="@{/refuseOpLivretA/{id}(id=${livretAOp.id})}">Refuse</a></td>       
+             
+      </tr>
+     
+   </th:block>
+
+ 
+  </tbody>
+</table>
+</div>
+</div>
+ <div th:replace="admin/fragments/footer::footer"></div>

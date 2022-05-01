@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.onlineBanking.model.CcpAccount;
 import com.onlineBanking.model.LivretA;
+import com.onlineBanking.model.Receiver;
 import com.onlineBanking.model.User;
 import com.onlineBanking.model.UserDetails;
 import com.onlineBanking.repository.CcpAccountRepository;
@@ -35,6 +36,9 @@ public void save(LivretA livretA) {
 public Optional<LivretA> findById(Long compteC) {
 	
 	return livretARepository.findById(compteC);
+}
+public Optional<LivretA> findByNumIban(String numIban) {
+	return livretARepository.findByNumIban(numIban);
 }
 	
 	

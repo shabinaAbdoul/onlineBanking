@@ -1,0 +1,42 @@
+<div th:replace="admin/fragments/headerAdmin::headerAdmin"></div>
+<br>
+<br>
+<div style="padding-left:20%;">
+<h3 class="text-center text-light">La Liste des utilisateurs</h3>
+
+<div class="table-responsive">
+<table class="table table-bordered text-white" id="ccaTable">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Nom </th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">Email</th>
+      <th scope="col">Address</th> 
+      <th scope="col">Compte Ccp</th> 
+      <th scope="col">Compte Livret-A</th> 
+    </tr>
+  </thead>
+  <tbody> 
+  
+
+   <th:block th:each="user : ${users}">
+      <tr>
+         <td th:text="${user.firstName}">...</td>
+         <td th:text="${user.lastName}">...</td>
+         <td th:text="${user.mobile}">...</td>
+         <td th:text="${user.email}">...</td> 
+         <td><span th:text="${user.address}"/><span>,</span><span th:text="${user.ville}"/><span>,</span>
+         <span th:text="${user.codePostal}"/></td> 
+           <td><a th:text="${user.ccpAccount.id}" th:href="@{/ccaListe/{id}(id=${user.id})}">...</a> </td>
+           <td><a th:text="${user.livretA.id}" th:href="@{/livretAListe/{id}(id=${user.id})}">...</a> </td>
+               
+      </tr>
+     
+   </th:block>
+
+ 
+  </tbody>
+</table>
+</div>
+  <div th:replace="admin/fragments/footer::footer"></div>

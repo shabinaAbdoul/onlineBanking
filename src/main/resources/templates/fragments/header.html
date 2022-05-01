@@ -28,118 +28,15 @@
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 
 </head>
-<body class="container">
-<div class="bg-info text-center text-dark" style="height:15%; padding-top:1.5%;">
-<h1>Bienvenu La Banque Bon heure</h1>
+<body>
+<div style="background-image: url('../images/bonheur1.jpg'); background-repeat: no-repeat;">
+<div class="bg-info bg-opacity-75 bg-gradient  text-center text-primary" style="height:15%;">
+<img width="5%" style="border-radius: 50%; display:inline"src="https://media.istockphoto.com/vectors/letter-linked-business-logo-bh-logo-design-bh-logo-design-for-real-vector-id1339017004?b=1&k=20&m=1339017004&s=170667a&w=0&h=f1X72CJ3_E4rhkpgmjzkIs4l1HcXmv_enlAXNmZSC24="/>
+<span style="font-size:200%; font-weight:bold;">Bonne heure</span>
+<h5>La banque en ligne</h5>
 </div>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <!-- Container wrapper -->
-  <div class="container">
-    <!-- Navbar brand -->
-    <a class="navbar-brand me-2" href="https://mdbgo.com/">
-      <img
-        src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-        height="16"
-        alt="MDB Logo"
-        loading="lazy"
-        style="margin-top: -1px;"
-      />
-    </a>
 
-    <!-- Toggle button -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-mdb-toggle="collapse"
-      data-mdb-target="#navbarButtonsExample"
-      aria-controls="navbarButtonsExample"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarButtonsExample">
-      <!-- Left links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/home}">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-        
-  <button
-    class="btn btn-primary dropdown-toggle"
-    type="button"
-    id="dropdownMenuButton"
-    data-mdb-toggle="dropdown"
-    aria-expanded="false"
-  >
-   Operations
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <li><a class="dropdown-item" th:href="@{/cca}">CCA</a></li>
-     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" th:href="@{/livretA}">Livret A</a></li>
-   
-  </ul>
-
-        </li>
-        <li class="nav-item dropdown">
-        
-  <button
-    class="btn btn-primary dropdown-toggle"
-    type="button"
-    id="dropdownMenuButton"
-    data-mdb-toggle="dropdown"
-    aria-expanded="false"
-  >
-   Virement
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <li><a class="dropdown-item" th:href="@{/aMonCompte}">Enter mes comptes</a></li>
-     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" th:href="@{/aAutreCompte}">Another comptes</a></li>
-   
-  </ul>
-
-        </li>
-         <li class="nav-item dropdown">
-        
-  <button
-    class="btn btn-primary dropdown-toggle"
-    type="button"
-    id="dropdownMenuButton"
-    data-mdb-toggle="dropdown"
-    aria-expanded="false"
-  >
-   Actions
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <li><a class="dropdown-item" th:href="@{/retrait}">Retrait</a></li>
-     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" th:href="@{/versement}">Versement</a></li>
-   
-  </ul>
-
-        </li>
-      </ul>
-      <!-- Left links -->
-
-      <div class="d-flex align-items-center">
-        <button type="button" class="btn btn-link me-3">
-         Mon profile
-        </button>
-       <a th:href="@{/logout}"> <button type="button" class="btn btn-primary me-3">
-          Log out
-        </button> </a>       
-      </div>
-    </div>
-    <!-- Collapsible wrapper -->
-  </div>
-  <!-- Container wrapper -->
-</nav>
 <!-- Navbar -->
 
 

@@ -22,7 +22,8 @@ public class CcpAccount {
 	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;	
+	private Long id;
+	private String numIban;
 	
 	private Double balance;
 	 
@@ -32,6 +33,14 @@ public class CcpAccount {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getNumIban() {
+		return numIban;
+	}
+
+	public void setNumIban(String numIban) {
+		this.numIban = numIban;
 	}
 
 	public void setId(Long id) {

@@ -1,6 +1,8 @@
 package com.onlineBanking.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +19,8 @@ public class UserDetails {
 	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;	
+	private Long id;
+	private String genre;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -27,16 +30,17 @@ public class UserDetails {
 	private String codePostal;
 	
 	
-	@OneToOne
+	 @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	    private CcpAccount ccpAccount;
 
-	    @OneToOne
+	 @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	    private LivretA livretA;
 	
-	public UserDetails(Long id, String firstName, String lastName, String email, String mobile, String address,
+	public UserDetails(Long id, String genre,String firstName, String lastName, String email, String mobile, String address,
 			String ville, String codePostal) {
 		super();
 		this.id = id;
+		this.genre = genre;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -48,9 +52,10 @@ public class UserDetails {
 	}
 	
 	
-	public UserDetails(String firstName, String lastName, String email, String mobile, String address, String ville,
+	public UserDetails(String genre,String firstName, String lastName, String email, String mobile, String address, String ville,
 			String codePostal) {
 		super();
+		this.genre = genre;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -61,6 +66,8 @@ public class UserDetails {
 		
 		
 	}
+
+
 
 
 	public UserDetails() {
@@ -73,6 +80,16 @@ public class UserDetails {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+
+	public String getGenre() {
+		return genre;
+	}
+
+
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 	public String getFirstName() {
 		return firstName;

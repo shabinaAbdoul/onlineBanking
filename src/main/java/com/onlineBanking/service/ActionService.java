@@ -52,7 +52,7 @@ public void versement(String account,Double amount,Principal principal) {
          LivretA livretA  = user.getUserDetails().getLivretA();
          livretA.setBalance(livretA.getBalance()+amount);
          livretAService.save(livretA);
-         LivretAOperation livretAOperation= new LivretAOperation("Veresement à Compte CCP", "crédit", "Terminé", amount, livretA.getBalance(), livretA);
+         LivretAOperation livretAOperation= new LivretAOperation("Veresement à Compte LivretA", "crédit", "Terminé", amount, livretA.getBalance(), livretA);
          Date date=new Date();
          livretAOperation.setCreationDateTime(date);
          livretAOperationService.save(livretAOperation);
@@ -75,7 +75,7 @@ public void retrait(String account,Double amount,Principal principal) {
         LivretA livretA  = user.getUserDetails().getLivretA();
         livretA.setBalance(livretA.getBalance()-amount);
         livretAService.save(livretA);
-        LivretAOperation livretAOperation= new LivretAOperation("Retrait de Compte CCP", "débit", "Terminé", amount, livretA.getBalance(), livretA);
+        LivretAOperation livretAOperation= new LivretAOperation("Retrait de Compte LivretA", "débit", "Terminé", amount, livretA.getBalance(), livretA);
         Date date=new Date();
         livretAOperation.setCreationDateTime(date);
         livretAOperationService.save(livretAOperation);

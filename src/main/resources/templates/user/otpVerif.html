@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html th:fragment="header" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<!-- Font Awesome -->
+	<!-- Font Awesome -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+	<!-- MDB -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="bg-info bg-opacity-75 bg-gradient  text-center text-primary" style="height:15%; padding:2%;">
+		<img width="5%" style="border-radius: 50%; display:inline"src="https://media.istockphoto.com/vectors/letter-linked-business-logo-bh-logo-design-bh-logo-design-for-real-vector-id1339017004?b=1&k=20&m=1339017004&s=170667a&w=0&h=f1X72CJ3_E4rhkpgmjzkIs4l1HcXmv_enlAXNmZSC24="/>
+<span style="font-size:200%; font-weight:bold;">Bonne heure</span>
+<h5>La banque en ligne</h5>
+	</div>
+
+	<div class="bg-success p-2 text-white bg-opacity-25
+bg-gradient d-flex align-items-center justify-content-center" style="height:100vh;">
+	<form th:action="@{/otpVerif/{id}(id=${userId})}" method="post" style="width:70vh;" onsubmit="return verifCode();" >
+	<div th:if="${error != null}"><div class="alert alert-danger">OTP est incorrect <a th:href="@{/tryAgainRegister/{id}(id=${userId})}">essayer encore</a> pour créer le compte</div></div>
+	<div class="alert alert-danger" id="emptyField"></div>
+	<div class="form-outline mb-4">
+				<input type="text" id="otpByUser" name="otpByUser" class="form-control  bg-light" />
+				<label class="form-label" for="otpByUser">Saisir le OTP</label>
+				</div>
+				<input type="hidden" id="otpBySys" name="otpBySys" th:value=${code} class="form-control  bg-light" />
+				<button type="submit" class="btn btn-primary btn-block mb-4">Ok</button>
+	</form>
+	</div>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
+<script>
+document.querySelector("#emptyField").style.display="none";
+function verifCode(){
+	if(document.querySelector("#otpByUser").value==""){
+		document.querySelector("#emptyField").innerHTML="Saisir le OTP";
+		document.querySelector("#emptyField").style.display="block";
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+</script>
+</body>
+</html>

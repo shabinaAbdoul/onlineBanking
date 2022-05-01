@@ -25,7 +25,7 @@ public class Receiver {
 	private String nom;
 	private String email;
 	private String mobile;
-	private Long accountNumber;
+	private String numIban;
 	
 	 @ManyToOne
 	    @JoinColumn(name = "user_id")
@@ -64,12 +64,12 @@ public class Receiver {
 		this.mobile = mobile;
 	}
 
-	public Long getAccountNumber() {
-		return accountNumber;
+	public String getNumIban() {
+		return numIban;
 	}
 
-	public void setAccountNumber(Long accountNumber) {
-		this.accountNumber = accountNumber;
+	public void setNumIban(String numIban) {
+		this.numIban = numIban;
 	}
 
 	public UserDetails getUserDetails() {
@@ -84,21 +84,21 @@ public class Receiver {
 		super();
 		
 	}
-	public Receiver(String nom, String email, String mobile, Long accountNumber) {
+	public Receiver(String nom, String email, String mobile, String numIban) {
 		super();
 		this.nom = nom;
 		this.email = email;
 		this.mobile = mobile;
-		this.accountNumber = accountNumber;
+		this.numIban = numIban;
 	}
 
-	public Receiver(Long id, String nom, String email, String mobile, Long accountNumber, UserDetails userDetails) {
+	public Receiver(Long id, String nom, String email, String mobile, String numIban, UserDetails userDetails) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.email = email;
 		this.mobile = mobile;
-		this.accountNumber = accountNumber;
+		this.numIban = numIban;
 		this.userDetails = userDetails;
 	}
 	

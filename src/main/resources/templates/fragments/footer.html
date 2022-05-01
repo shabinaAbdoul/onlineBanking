@@ -1,6 +1,11 @@
 <div th:fragment="footer">
 
-<div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+<div class="text-center text-dark p-3" style="position:sticky; bottom:0px;background-color: rgba(0, 0, 0, 0.2);">
+   <b> Contactez nous</b></br>
+    Bonne heure</br>
+    La banque en ligne </br>
+    Téléphone: 09 25 31 24 22</br>
+    E-mail: bonne_heure@bonneHeure.fr</br>
     © 2020 Copyright:
     <a class="text-dark"></a>
   </div>
@@ -19,14 +24,107 @@ $(document).ready(function () {
 	 
 	});
 </script>
+<script>
+document.querySelector('#compteD').addEventListener("change", function() {
+  if (this.value == "LivretA") {
+  document.querySelector('#compteC').value="Ccp";
+  }else{
+      document.querySelector('#compteC').value="LivretA";
+      }});
+      </script>
+      <script>
+      document.querySelector("#receiverError").style.display = "none";
+		function verifReceiver() {
+			let nom = document.querySelector("#nom");
+			let numIban = document.querySelector("#numIban");
+			if (nom.value == "" || numIban.value == "")
+			{
+				 document.querySelector("#receiverError").style.display = "block";
+				 return false;
+			}
+			else
+			return true;
+			}
+     </script>
+<script>
+ document.querySelector("#livretARib").style.display = "none";
+ document.querySelector('#compte').addEventListener("change", function() {
+  if (this.value == "LivretA") {
+	document.querySelector("#ccpRib").style.display = "none";
+  document.querySelector("#livretARib").style.display = "block";
+  }else{
+     document.querySelector("#livretARib").style.display = "none";
+     document.querySelector("#ccpRib").style.display = "block";
+      }});
+</script>
+<script>
+document.querySelector("#errorAutreCompte").style.display = "none";
 
+function verifRecepient(){
+	if(document.querySelector("#receiverId").value == "default"){
+		document.querySelector("#errorAutreCompte").style.display = "block";
+		document.querySelector("#errorAutreCompte").innerHTML = "Séléctionner un receiver";
+		return false;
+	}
+	else if(document.querySelector("#amountCompteExterne").value == ""){
+		document.querySelector("#errorAutreCompte").style.display = "block";
+		document.querySelector("#errorAutreCompte").innerHTML = "Saisir le montant";
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+</script>
+<script>
+document.querySelector("#errorEntreMonCompte").style.display = "none";
 
-
+function verifEntreMonCompte(){
+	 if(document.querySelector("#amountEntreMonCompte").value == ""){
+		document.querySelector("#errorEntreMonCompte").style.display = "block";
+		document.querySelector("#errorEntreMonCompte").innerHTML = "Saisir le montant";
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+</script>
+<script>		
+		document.querySelector("#errorUpdate").style.display = "none";
+		function verifUpdate() {
+			let mobileformat = /^(0|(\\+33)|(0033))[1-9][0-9]{8}$/;
+			let codePostalFormat = /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/;
+			let mobileUpdate = document.querySelector("#mobileUpdate");
+			let nomUpdate = document.querySelector("#nomUpdate");
+			let prenomUpdate = document.querySelector("#prenomUpdate");
+			let addressUpdate = document.querySelector("#addressUpdate");
+			let villeUpdate = document.querySelector("#villeUpdate");
+			let codePostalUpdate = document.querySelector("#codePostalUpdate");
+			if (mobileUpdate.value == "" || nomUpdate.value == "" || prenomUpdate.value == ""
+				|| addressUpdate.value == "" || villeUpdate.value == "" || codePostalUpdate.value == "") {
+				document.querySelector("#errorUpdate").style.display = "block";
+				document.querySelector("#errorUpdate").innerHTML="Tous les champs sont requis!!";
+				return false;
+			}
+			else if(!(mobileUpdate.value).match(mobileformat)){
+				document.querySelector("#errorUpdate").style.display = "block";
+				document.querySelector("#errorUpdate").innerHTML="Numéro de portable est incorrect!!";
+				return false;
+			}
+			else if(!(codePostalUpdate.value).match(codePostalFormat)){
+				document.querySelector("#errorUpdate").style.display = "block";
+				document.querySelector("#errorUpdate").innerHTML="Code postal est incorrect!!";
+				return false;
+			}
+			else{
+				return true;
+			}
+			}
+			</script>
+			
   </body>
 </html>
-
-  
-  
-  </div>
+ </div>
  
 

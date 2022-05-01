@@ -19,6 +19,10 @@ public interface CcpOperationRepository extends JpaRepository<CcpOperation, Long
 
 	List<CcpOperation> findByCcpAccount(CcpAccount ccpAccount);
 
+	List<CcpOperation> findByStatus(String status);
+
+	List<CcpOperation> findByCcpAccountOrderByCreationDateTimeDesc(CcpAccount ccpAccount);
+
 	
 
 }

@@ -1,0 +1,27 @@
+<div th:replace="admin/fragments/headerAdmin::headerAdmin"></div>
+<a class="text-primary" th:href="@{/users}">
+<div class="gradient-custom text-light text-center" style="margin:5% 45%; width:25%;height:25%;"> 
+<h1 style="padding-top:10%">Users</h1>
+<p>Total utilisateurs: <b th:text="${totalUsers}"></b></p>
+</div>
+</a>
+
+<div class="row" style="height:100%">
+<div class="col">
+<a th:href="@{/virementAttendsCcp}">
+<div class="gradient-custom2 text-light text-center" style="margin:5% 50%; width:50%;height:25%"> 
+<h1 class="text-light text-center" style="padding-top:10%">CCP</h1>
+<p>Total virement en attends: <b th:text="${totalCcpOperations}"></b></p>
+</div>
+</a>
+</div>
+<div class="col">
+<a th:href="@{/virementAttendsLivretA}">
+<div class="gradient-custom3 text-light text-center" style="margin:5% 30%; width:50%;height:25%"> 
+<h1 class="text-light text-center" style="padding-top:10%">Livret A</h1>
+<p>Total virement en attends: <b th:text="${totalLivretAOperations}"></b></p>
+</div>
+</a >
+</div>
+</div>  
+  <div th:replace="admin/fragments/footer::footer"></div>
