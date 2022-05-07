@@ -122,6 +122,18 @@ function verifEntreMonCompte(){
 			}
 			}
 			</script>
+			<script>
+			function verifCodeVirement() {
+			if(document.querySelector("#codeByUser").value == document.querySelector("#codeByAdmin").value){
+				$('#codeBonVirement').modal('show');
+				return false;
+			}
+			else{
+				$('#codePasBonVirement').modal('show');
+				return false;
+			}
+			}
+			</script>
 			
   </body>
 </html>

@@ -2,6 +2,7 @@ package com.onlineBanking.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.onlineBanking.mailConfig.MailVerif;
 import com.onlineBanking.model.CcpAccount;
 import com.onlineBanking.model.CcpOperation;
 import com.onlineBanking.model.LivretA;
@@ -117,7 +119,7 @@ public class Virement {
 	}
 	
 	@PostMapping("/aAutreCompte")
-	public String virement(@ModelAttribute("amount") String amount, @ModelAttribute("compteD") String compteD, @ModelAttribute("compteC") String compteC, Principal principal) {
+	public String virement(Model model,@ModelAttribute("amount") String amount, @ModelAttribute("compteD") String compteD, @ModelAttribute("compteC") String compteC, Principal principal) {
 		 User user = userService.findByUserName(principal.getName());
 		 CcpAccount ccpAccount = user.getUserDetails().getCcpAccount();
 		 LivretA livretA  = user.getUserDetails().getLivretA();
@@ -131,8 +133,25 @@ public class Virement {
 		        	 return "redirect:/aAutreCompte?error";
 		         }
 			    }
+		//virementService.aAutreCompte(compteD,Long.parseLong(compteC), Double.parseDouble(amount), principal); 
+		//return "redirect:/home";
+		    Random rnd = new Random();
+			 int otpCode = rnd.nextInt(9999);
+		        String otpCodeString= String.format("%04d", otpCode);
+			//MailVerif.sendMail(user.getUserDetails().getEmail(), "Votre OTP code pour efféctuer le virement: "+otpCodeString);
+			System.out.println(otpCodeString);
+		        model.addAttribute("codeByAdmin", otpCodeString);
+		        model.addAttribute("compteD", compteD);
+		        model.addAttribute("compteC", compteC);
+		        model.addAttribute("amount", amount);
+		    return "banking/aAutreCompte";
+	}
+	
+	@PostMapping("/codeBon")
+	public String codeBonVirement(Model model,@ModelAttribute("amount") String amount, @ModelAttribute("compteD") String compteD, @ModelAttribute("compteC") String compteC, Principal principal) {
 		virementService.aAutreCompte(compteD,Long.parseLong(compteC), Double.parseDouble(amount), principal); 
-		return "redirect:/home";
+		return "redirect:/home";	
+		
 	}
 	
 

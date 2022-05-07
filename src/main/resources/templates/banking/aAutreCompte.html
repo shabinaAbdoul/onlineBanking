@@ -1,7 +1,60 @@
 <div th:replace="fragments/header::header"></div>
 <div th:replace="fragments/nav::nav"></div>
+<div th:if="${codeByAdmin != null}">
+<div class="row d-flex justify-content-center" style="padding-top:5%; height:100%;">
+  <form th:action="@{/codeBon}" method="post" onsubmit="return verifCodeVirement();"class="col col-3">  
+  <p>Saisir le code envoyer à votre mail </p>
+  <input type="text" id="codeByUser" name="codeByUser" class="form-control">
+  <input type="text" id="codeByAdmin" th:value=${codeByAdmin} name="codeByAdmin">  
+   <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+  </form>
+ 
+<!-- Modal -->
+<div class="modal fade" id="codeBonVirement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">Code est bon!!</div>
+      <div class="modal-footer">
+      <form th:action="@{/codeBon}" method="post">
+       <input type="hidden" th:value=${compteD} name="compteD"> 
+       <input type="hidden" th:value=${compteC} name="compteC"> 
+        <input type="hidden" th:value=${amount} name="amount"> 
+        <button type="submit" class="btn btn-primary">Ok</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal failed -->
+<div class="modal fade" id="codePasBonVirement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">Code n'est pas bon!!</div>
+      <div class="modal-footer">
+      <form th:action="@{/aAutreCompte}" method="post">
+       <input type="hidden" th:value=${compteD} name="compteD"> 
+       <input type="hidden" th:value=${compteC} name="compteC"> 
+        <input type="hidden" th:value=${amount} name="amount"> 
+        <button type="submit" class="btn btn-primary">Renvoyer le code</button>       
+      </form>
+       <a th:href="@{/home}"><button type="button" class="btn btn-primary">Quitter le virement</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+ </div>
+</div>
+<div th:if="${codeByAdmin == null}">
 <div class="row d-flex justify-content-center" style="padding-top:2%; height:100%;">
-<a th:href="@{/receiver}" class="d-flex justify-content-center" style="height:5%;"><button class="btn btn-primary ">Ajouter un récipient</button></a>
+<a th:href="@{/receiver}" class="d-flex justify-content-center" style="height:5%;"><button class="btn btn-primary ">Ajouter un bénéficiaire</button></a>
 
 <form th:action="@{/aAutreCompte}" onsubmit="return verifRecepient();"method="post" class="col col-6">
 <div th:if="${param.error}" class="alert alert-danger">
@@ -16,7 +69,7 @@
 </select><br>
 <p>Compte à créditer </p>
  <select class="form-control" name="compteC" id="receiverId" required>
-                        <option disabled="disabled" value="default" selected="selected"> -- Sélectionnez le recipient -- </option>
+                        <option disabled="disabled" value="default" selected="selected"> -- Sélectionnez le bénéficiaire -- </option>
                         <option data-th-each="receiver : ${receivers}" data-th-text="${receiver.nom}" data-th-value="${receiver.id}"></option>
                     </select>
 
@@ -29,6 +82,7 @@
   </div> 
   <button class="btn btn-primary btn-block mb-4">Submit</button>
 </form>
+</div>
 </div>
 </div>
 <div th:replace="fragments/footer::footer"></div>
